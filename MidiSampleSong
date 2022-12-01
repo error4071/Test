@@ -1,0 +1,113 @@
+import java.util.Scanner;
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.MidiUnavailableException;
+import javax.sound.midi.Receiver;
+import javax.sound.midi.ShortMessage;
+import javax.sound.midi.Synthesizer;
+
+import static java.awt.SystemColor.text;
+
+public class Main {
+    private static final byte C = 60;
+    private static final byte D = 62;
+    private static final byte E = 64;
+    private static final byte F = 65;
+    private static final byte G = 67;
+    private static final byte A = 69;
+    private static final byte B = 70;
+
+    final static int[][] NOTES ={
+            {67, 2, 1},
+            {64, 1, 2},
+            {67, 2, 1},
+            {64, 1, 2},
+            {67, 1, 1},
+            {65, 1, 1},
+            {64, 1, 1},
+            {62, 1, 1},
+            {60, 2, 1},
+            {69, 2, 1},
+            {72, 1, 1},
+            {69, 1, 1},
+            {67, 2, 1},
+            {64, 1, 2},
+            {67, 1, 1},
+            {65, 1, 1},
+            {64, 1, 1},
+            {62, 1, 1},
+            {60, 2, 1},
+
+    };
+
+    public static void main(String[] arguments) throws MidiUnavailableException, InvalidMidiDataException, InterruptedException {
+//        System.out.println("Please enter any note: ");
+//
+//        Scanner scanner = new Scanner(System.in);
+//        String text = scanner.nextLine();
+//        System.out.println("You entered: " + text);
+
+
+        Synthesizer synthesizer = MidiSystem.getSynthesizer();
+        synthesizer.open();
+
+        Receiver receiver = synthesizer.getReceiver();
+
+        receiver.send(new ShortMessage(ShortMessage.PROGRAM_CHANGE, 117, 100), -100);
+
+        for (int[] note : NOTES) {
+            int noteId = (byte)note[0];
+            int duration = note[1];
+            int count = note[2];
+
+            for (int i = 0; i < count; i++) {
+                playNote(receiver, (byte) noteId, duration);
+            }
+        }
+
+//        text = text.toUpperCase().trim();
+//        while (!text.equals("EXIT")) {
+//            byte noteId = convertToId(text);
+//            playNote(receiver, noteId);
+//            text = scanner.nextLine().toUpperCase().trim();
+//        }
+
+        synthesizer.close();
+//        scanner.close();
+    }
+
+
+    private static void playNote(Receiver receiver, byte noteId, int duration) throws InvalidMidiDataException, InterruptedException {
+        ShortMessage msg = new ShortMessage();
+        msg.setMessage(ShortMessage.NOTE_ON, noteId, 100);
+
+        receiver.send(msg, -100);
+
+        Thread.sleep(500 * duration);
+
+        msg.setMessage(ShortMessage.NOTE_OFF, noteId, 100);
+    }
+
+    private static byte convertToId(String text) {
+        String note = text.toUpperCase().trim();
+        switch (note) {
+            case "A":
+                return A;
+            case "B":
+                return B;
+            case "C":
+                return C;
+            case "D":
+                return D;
+            case "E":
+                return E;
+            case "F":
+                return F;
+            case "G":
+                return G;
+            default:
+                System.out.println("You entered incorrect note: " + text);
+                return C;
+        }
+    }
+}
