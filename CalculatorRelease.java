@@ -1,66 +1,56 @@
 import java.util.Scanner;
 
-public class CalculatorRelease {
+class Junk {
     public static void main(String[] arguments) {
-
-        Scanner first = new Scanner(System.in);
-        Scanner second = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println();
-        System.out.println("Пожалуйста, выберите нужную опцию:");
+        System.out.println("Выберите нужную опцию: ");
         System.out.println();
-        System.out.println("1 - сложение");
-        System.out.println("2 - вычитание");
-        System.out.println("3 - умножение.");
-        System.out.println("4 - деление.");
+        System.out.println("1. Сложение.");
+        System.out.println("2. Вычитание. ");
+        System.out.println("3. Умножение.");
+        System.out.println("4. Деление.");
+        System.out.println();
 
-        int command = first.nextInt();
+        int x = scanner.nextInt();
+
+        switch (x) {
+
+            case 1:
+            System.out.println("Вы выбрали: Сложение."); break;
+            case 2:
+            System.out.println("Вы выбрали: Вычитание."); break;
+            case 3:
+            System.out.println("Вы выбрали: Умножение."); break;
+            case 4:
+            System.out.println("Вы выбрали: Деление."); break;
+            default:
+            System.out.println("error"); break;
+        }
+
+
+        System.out.println("Введите первое число: ");
+        double a = scanner.nextDouble();
+        System.out.println("Введите второе число: ");
+        double b = scanner.nextDouble();
 
         while (true) {
 
-
-            if (command == 1) {
-
-                System.out.println(" Введите первое число: ");
-                double a = first.nextDouble();
-
-                System.out.println("Введите второе число: ");
-                double b = second.nextDouble();
-
-                System.out.println("Решение: ");
+            if (x == 1) {
                 System.out.println(a + b);
             }
-            if (command == 2) {
-                System.out.println(" Введите первое число: ");
-                double a = first.nextInt();
-
-                System.out.println("Введите второе число: ");
-                double b = second.nextDouble();
-
-                System.out.println("Решение: ");
+            if (x == 2) {
                 System.out.println(a - b);
             }
-            if (command == 3) {
-                System.out.println(" Введите первое число: ");
-                double a = first.nextDouble();
-
-                System.out.println("Введите второе число: ");
-                double b = second.nextDouble();
-
-                System.out.println("Решение: ");
+            if (x == 3) {
                 System.out.println(a * b);
             }
-            if (command == 4) {
-                System.out.println(" Введите первое число: ");
-                double a = first.nextDouble();
-
-                System.out.println("Введите второе число: ");
-                double b = second.nextDouble();
-
-                System.out.println("Решение: ");
+            if (x == 4) {
                 System.out.println(a / b);
             }
-        break;
+            break;
         }
     }
 }
+
