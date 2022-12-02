@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] arguments) {
+        System.out.println("Выберите нужное действие: ");
+        
+        Scanner scanner = new Scanner(System.in);
+        double a = scanner.nextDouble();
+        double b = scanner.nextDouble();
+        int c = scanner.nextInt();
+        
+        System.out.println(c + "1. Сложение.");
+        System.out.println(c + "2. Вычитание.");
+        System.out.println(c + "3. Умножение.");
+        System.out.println(c + "4. Деление.");
+        System.out.println();
+        
+        switch(c) {
+            case 1:
+                System.out.println("Вы выбрали СЛОЖЕНИЕ.");
+                System.out.println(a + b);
+                break;
+            case 2: 
+                System.out.println("Вы выбрали - ВЫЧИТАНИЕ");        
+                System.out.println(a - b);
+                break;
+            case 3:
+                System.out.println("Вы выбрали УМНОЖЕНИЕ.");
+                System.out.println(a * b);
+                break;
+            case 4:
+                System.out.println("Вы выбрали СЛОЖЕНИЕ.");
+                System.out.println(a / b);
+                break;
+            default:
+                System.out.println("Fatal error!!! System emergency power off!!!");    
+            
+        }
+    }
+}
